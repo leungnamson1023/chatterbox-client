@@ -11,14 +11,14 @@
     <script src="bower_components/backbone/backbone.js"></script>
     <script>
 // YOU DO NOT NEED TO EDIT THIS CODE
-if (!/(&|\?)username=/.test(window.location.search)) {
-  var newSearch = window.location.search;
-  if (newSearch !== '' & newSearch !== '?') {
-    newSearch += '&';
-  }
-  newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
-  window.location.search = newSearch;
-}
+// if (!/(&|\?)username=/.test(window.location.search)) {
+//   var newSearch = window.location.search;
+//   if (newSearch !== '' & newSearch !== '?') {
+//     newSearch += '&';
+//   }
+//   newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+//   window.location.search = newSearch;
+// }
     </script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
@@ -27,11 +27,43 @@ if (!/(&|\?)username=/.test(window.location.search)) {
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+
+          <button id="room">Lobby</button>
+          <button id="room1">Off Topic</button>
+          <button id="room2"> Private</button>
+    <script> 
+$('#room').on('click', function(e) {
+  app.chatRoom = 'lobby';
+  $('.currentChat').text('Lobby');
+  $('#chats').empty();
+  //app.renderRoom();
+});
+$('#room1').on('click', function(e) {
+  app.chatRoom = 'Off Topic';
+  $('.currentChat').text('Off Topic');
+  //app.renderRoom();
+});
+$('#room2').on('click', function(e) {
+  app.chatRoom = 'Private';
+  $('.currentChat').text('Private');
+  //app.renderRoom();
+});
+    </script>
+        
       <!-- Your HTML goes here! -->
     </div>
+    <div class="currentChat">Lobby</div>
+         <form>
+
+
+
+       <textarea class="chat" type="text" placeholder="Enter message here"></textarea>
+        <button id="send-message" class="submit">Send message</button>
+      </form>
     <div id="chats">
-      <div>lobby</div>
-        
+        <div id="send">
+      </div>
+    </div>
     </div>
   </body>
 </html>

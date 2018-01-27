@@ -60,9 +60,17 @@ form input[type=text] {
 }
 
 .chat {
-    padding: 5px;
+/*    padding: 5px;
     margin-bottom: 5px;
-    background-color: #eee;
+    background-color: #eee; */
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+
+
+
 }
 
 .chat .username {
@@ -87,4 +95,10 @@ form input[type=text] {
     color: #fff;
     background-color: #0090da;
 }
+
+
+.messages {
+    color:#42f4dc;
+}
+
 

@@ -4,15 +4,20 @@ let app = {
   data: [],
   myUserName: location.search.slice(10),
   userNames: [],
-  chatRooms: {general: 'lobby'} // my user name
+  chatRooms: 'lobby' // my user name
 };
 
-app.currentRoom = {
 
+
+var message = {
+  username: 'shawndrost',
+  text: 'trololo',
+  roomname: '4chan'
 };
 
 app.init = function() {
   this.fetch();
+  setTimeout(this.renderRoom.bind(this), 500);
 };
 
 
@@ -21,7 +26,7 @@ app.send = function (message) {
   // This is the url you should use to communicate with the parse API server.
     url: this.server,
     type: 'POST',
-    data: message,
+    data: JSON.stringify(message),
     contentType: 'application/json',
     success: function (data) {
       console.log('chatterbox: Message sent');
@@ -39,7 +44,7 @@ app.fetch = function() {
   // This is the url you should use to communicate with the parse API server.
     url: this.server,
     type: 'GET',
-    // data: JSON.stringify(message),
+    data: 'order=-createdAt&limit=500',
     contentType: 'application/json',
     success: function (data) {
       app.data = data.results;
@@ -59,47 +64,41 @@ app.clearMessages = function() {
 
 
 app.renderMessage = function() {
-  var userElement = document.createElement('ul');
-
-
-  var user = document.createTextNode('test');
-  userElement.appendChild(user);
-
-  $('#chats').append(userElement);
-
-
-  var tag = $('#chats').children().attr('class', 'userName');
-
+  // create a div with a class username while looping passing in fetched data username
   
+  // create another div with a class message, while looping and passing in fetched data message  
+  for (var i = 0; i < app.data.length; i++) {
+    var usernameTag = $('<div class="username">' + app.data[i].username + '</div>');
+    var msgTag = $('<div class="messages">' + app.data[i].text + '</div>');
+
+    $('#chats').append(usernameTag);
+    $('#chats').append(msgTag);
 
 
-  var messageElement = document.createElement('li');
-  
-  var message = document.createTextNode('msg');
-  messageElement.appendChild(message);
+  }
 
-  console.log(messageElement);
 
-  $('#chats .userName').append(messageElement);
 
-  var messageTag = $('#chats .userName').children().attr('class', 'msg');
+
 
 };
 
-app.renderRoom = function(roomName) {
-  var roomElement = $('<div id="roomSelect"></div');
-  var newRoom = $('<button type="button">' + roomName + '</button>');
-  newRoom.data('roomName', roomName);
-
-  newRoom.on('click', function(event) {
-    app.currentRoom = roomName;
-    
-  });
-
-  $('#main').append(roomElement);
+app.renderRoom = function() {
+  $("#chats").empty();
 
 
-  $('#roomSelect').append(newRoom);
+  for (var i = 0; i < app.data.length; i++) {
+    if (app.data[i].roomname === app.chatRooms) {
+      var usernameTag = $('<div class="username">' + app.data[i].username + '</div>');
+      var msgTag = $('<div class="messages">' + app.data[i].text + '</div>');
+
+      $('#chats').append(usernameTag);
+      $('#chats').append(msgTag);
+
+    }
+  }
+  
+
 };
 
 
@@ -116,17 +115,12 @@ app.renderRoom = function(roomName) {
 app.addFriend = function() {
   
 // testObj.results; // an arrays and loop through and get all usernames
-  
-
-  var userNameObj = {};
-  var fetchedData = app.fetch();
-  testObj.results.forEach(function(value) {
-    userNameObj[value.username] = value.username;
-  });
-
-  console.log(userNameObj);
 
 };
+
+
+
+
 
 
 
