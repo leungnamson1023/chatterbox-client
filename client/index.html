@@ -25,41 +25,59 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
+    <div id="header">
+      <h2>My Friends!</h2>
+    </div>
+    <div id="friends"> 
+    </div>
     <div id="main">
       <h1>chatterbox</h1>
 
-          <button id="room">Lobby</button>
-          <button id="room1">Off Topic</button>
-          <button id="room2"> Private</button>
-    <script> 
-$('#room').on('click', function(e) {
-  app.chatRoom = 'lobby';
-  $('.currentChat').text('Lobby');
-  $('#chats').empty();
-  //app.renderRoom();
+          <!-- <button class="room">lobby</button> -->
+<!--     <script> 
+$('.room').on('click', function(e) {
+  console.log();
+  app.chatRooms = $(this).text();
+  $('.currentChat').text(app.chatRooms);
+  app.renderRoom();
 });
-$('#room1').on('click', function(e) {
-  app.chatRoom = 'Off Topic';
-  $('.currentChat').text('Off Topic');
-  //app.renderRoom();
-});
-$('#room2').on('click', function(e) {
-  app.chatRoom = 'Private';
-  $('.currentChat').text('Private');
-  //app.renderRoom();
-});
-    </script>
+    </script> -->
         
       <!-- Your HTML goes here! -->
     </div>
     <div class="currentChat">Lobby</div>
-         <form>
+<!--          <form> -->
+     <textarea class="chatRoom" type="room" placeholder="Create Room Here"></textarea>
+     <button id="roomCreater" class="roomcreate">Create New Room</button>
+ <script>
+
+// $("roomCreater").on("click","button", function() {
+//   var text = $('.chatRoom').val();
+//   console.log(text)
+//   $('#main').append( "<button class ='room'> " + text + "</button>" );
+// });
 
 
+// $('#roomCreater').on('click', function(e) {
+//   e.preventDefault();
+//   var text = $('.chatRoom').val();
+//   var newChat = $('<button class="room">' + text + '</button>');
+//   $('#main').append(newChat);
+//   $('.chatRoom').val('');
+  
+// });
 
+
+// $('.room').on('click', function(e) {
+//   console.log();
+//   app.chatRooms = $(this).text();
+//   $('.currentChat').text(app.chatRooms);
+//   app.renderRoom();
+// });
+</script>
        <textarea class="chat" type="text" placeholder="Enter message here"></textarea>
         <button id="send-message" class="submit">Send message</button>
-      </form>
+<!--       </form> -->
     <div id="chats">
         <div id="send">
       </div>
